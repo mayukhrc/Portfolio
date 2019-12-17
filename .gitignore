@@ -30,6 +30,6 @@
 yarn-debug.log*
 .yarn-integrity
 
-# I don't want to show my secrets
+# I don't want to show my master key
 
-/config/secrets.yml
+/config/master.key
