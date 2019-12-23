@@ -1,10 +1,13 @@
 class MyPortfoliosController < ApplicationController
+	
 	def index
 		@portfolio=MyPortfolio.all
 	end
+	
 	def new
 		@portfolio = MyPortfolio.new
 	end
+
 	def create
     @portfolio = MyPortfolio.new(params.require(:my_portfolio).permit(:title, :body))
 
@@ -20,6 +23,7 @@ class MyPortfoliosController < ApplicationController
  def edit
  	@portfolio = MyPortfolio.find(params[:id])
  end
+
  def update
  	@portfolio = MyPortfolio.find(params[:id])
  	respond_to do |format|
@@ -30,7 +34,17 @@ class MyPortfoliosController < ApplicationController
       end
     end
  end
+
  def show
  	@portfolio = MyPortfolio.find(params[:id])
+ end
+ 
+ def destroy
+ 	@portfolio = MyPortfolio.find(params[:id])
+ 	
+ 	@portfolio.destroy
+    respond_to do |format|
+      format.html { redirect_to my_portfolios_url, notice: 'Record was successfully destroyed.' }
+    end
  end
 end
