@@ -17,7 +17,7 @@ class MyPortfoliosController < ApplicationController
 	end
 
 	def create
-    @portfolio = MyPortfolio.new(params.require(:my_portfolio).permit(:title, :body))
+    @portfolio = MyPortfolio.new(params.require(:my_portfolio).permit(:title,:subtitle, :body))
 
     respond_to do |format|
       if @portfolio.save
@@ -35,7 +35,7 @@ class MyPortfoliosController < ApplicationController
  def update
  	@portfolio = MyPortfolio.find(params[:id])
  	respond_to do |format|
-      if @portfolio.update(params.require(:my_portfolio).permit(:title, :body))
+      if @portfolio.update(params.require(:my_portfolio).permit(:title, :subtitle, :body))
         format.html { redirect_to my_portfolios_path, notice: 'Blog was successfully updated.' }
       else
         format.html { render :edit }
