@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_24_012142) do
+ActiveRecord::Schema.define(version: 2019_12_28_020706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,9 @@ ActiveRecord::Schema.define(version: 2019_12_24_012142) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.integer "status", default: 0
+    t.bigint "topic_id"
     t.index ["slug"], name: "index_blogs_on_slug", unique: true
+    t.index ["topic_id"], name: "index_blogs_on_topic_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -38,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_12_24_012142) do
 
   create_table "my_portfolios", force: :cascade do |t|
     t.string "title"
+    t.string "subtitle"
     t.text "body"
     t.text "main_image"
     t.text "thumb_image"
@@ -50,6 +53,23 @@ ActiveRecord::Schema.define(version: 2019_12_24_012142) do
     t.integer "percent_utilized"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "badge"
   end
 
+  create_table "technologies", force: :cascade do |t|
+    t.string "name"
+    t.bigint "my_portfolio_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["my_portfolio_id"], name: "index_technologies_on_my_portfolio_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "blogs", "topics"
+  add_foreign_key "technologies", "my_portfolios"
 end
