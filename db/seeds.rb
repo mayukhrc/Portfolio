@@ -54,3 +54,15 @@ end
 		thumb_image: "https://place-hold.it/300x200"
 		)
 end
+
+3.times do |technology|
+	MyPortfolio.last.technologies.create!(
+		name: "Technology #{technology}"
+		)
+=begin
+	Technology.create!(
+		name: "Technology #{technology}",
+		my_portfolio_id: MyPortfolio.last.id
+	)
+=end			
+end
