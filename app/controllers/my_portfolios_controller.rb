@@ -2,7 +2,7 @@ class MyPortfoliosController < ApplicationController
   layout "portfolio"
 	
 	def index
-		@portfolio=MyPortfolio.all
+		@portfolios = MyPortfolio.all
 	end
 
 	def angular
